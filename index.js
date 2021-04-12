@@ -3,11 +3,20 @@ const app = express()
 const cors = require('cors')
 const PORT = process.env.PORT || 8080
 
-
+// DATABASE
 const requests = []
-
+// which urls to ignore
+const ignore_urls = ['/logs']
+// get the params which are specified only. like query, body, url, params, type,
+const parameters = ["query", "path", "method", "params", "x"]
 const API_LOGGER = (req, _res, next) => {
-  requests.push(req.query)
+  if(!ignore_urls.includes(req.path)){
+    const log = {}
+    parameters.forEach((prop) => {
+      log[prop] = req[prop]
+    })
+    requests.push(log)
+  }
   next()
 }
 
