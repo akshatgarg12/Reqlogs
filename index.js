@@ -9,11 +9,17 @@ const {logs, API_LOGGER} = require('./middleware/request')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(API_LOGGER)
-app.use(logs)
+
 app.use(express.static(__dirname+'/public'))
 app.set('view engine','ejs');
 
+// logs the request data to console in table form
+app.use(API_LOGGER({
+  ignore_urls : ['/logs'],
+  parameters : ["index","path","method","query","body","time"]
+}))
+// route to see the request table in HTML
+app.use(logs)
 
 app.get('/' , (req, res) => {
   res.send("hello world")
