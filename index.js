@@ -24,13 +24,15 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(API_LOGGER)
+app.use(express.static(__dirname+'/public'))
+app.set('view engine','ejs');
 
 app.get('/logs', (req, res) => {
   res.send(requests)
 })
 
 app.get('/' , (req, res) => {
-  res.send("hello world")
+  res.render('index', {name:"Akshat"});
 })
 
 app.listen(PORT, ()=>{
