@@ -28,11 +28,11 @@ app.use(express.static(__dirname+'/public'))
 app.set('view engine','ejs');
 
 app.get('/logs', (req, res) => {
-  res.send(requests)
+  res.render('index', {logs:requests, params: parameters});
 })
 
 app.get('/' , (req, res) => {
-  res.render('index', {name:"Akshat"});
+  res.send("hello world")
 })
 
 app.listen(PORT, ()=>{
