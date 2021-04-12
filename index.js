@@ -2,36 +2,23 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const PORT = process.env.PORT || 8080
+const {logs, API_LOGGER} = require('./middleware/request')
 
-// DATABASE
-const requests = []
-// which urls to ignore
-const ignore_urls = ['/logs']
-// get the params which are specified only. like query, body, url, params, type,
-const parameters = ["query", "path", "method", "params", "x"]
-const API_LOGGER = (req, _res, next) => {
-  if(!ignore_urls.includes(req.path)){
-    const log = {}
-    parameters.forEach((prop) => {
-      log[prop] = req[prop]
-    })
-    requests.push(log)
-  }
-  next()
-}
 
+// Middlewares
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(API_LOGGER)
+app.use(logs)
 app.use(express.static(__dirname+'/public'))
 app.set('view engine','ejs');
 
-app.get('/logs', (req, res) => {
-  res.render('index', {logs:requests, params: parameters});
-})
 
 app.get('/' , (req, res) => {
+  res.send("hello world")
+})
+app.post('/' , (req, res) => {
   res.send("hello world")
 })
 
