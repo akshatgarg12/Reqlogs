@@ -24,9 +24,11 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(API_LOGGER)
+app.use(express.static(__dirname+'/public'))
+app.set('view engine','ejs');
 
 app.get('/logs', (req, res) => {
-  res.send(requests)
+  res.render('index', {logs:requests, params: parameters});
 })
 
 app.get('/' , (req, res) => {
