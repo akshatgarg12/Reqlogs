@@ -1,31 +1,21 @@
-import express , {Request, Response} from 'express'
-import path from "path";
-const app = express()
-import cors from 'cors'
-const PORT = process.env.PORT || 8080
-import {RequestLogger} from './middleware/request'
+// import express , {Request, Response} from 'express'
+// const app = express()
+// const PORT = process.env.PORT || 8080
+// import {RequestLogger} from './request'
 
-// Middlewares
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+// // logs the request data to console in table form
+// const RL = new RequestLogger({ignore_urls : ['/logs'],showLatestFirst : false})
+// app.use(RL.Console())
+// app.use(RL.Webpage())
 
-app.use(express.static(__dirname+'src'+ '/public'))
-app.set( "views", path.join( __dirname, "views" ) );
-app.set('view engine','ejs');
+// app.get('/' , (_req:Request, res:Response) : void => {
+//   res.send("hello world")
+// })
 
-// logs the request data to console in table form
-const RL = new RequestLogger({ignore_urls : ['/logs'],parameters:["index","path","method","query","body","time"], showLatestFirst : false})
-app.use(RL.Console())
-app.use('/logs',RL.Webpage())
+// app.listen(PORT, () : void => {
+//   console.log(`Server started at port : ${PORT}`)
+// })
+// Copy all the view templates
 
-app.get('/' , (_req:Request, res:Response) : void => {
-  res.send("hello world")
-})
-app.post('/' , (_req:Request, res:Response) : void  => {
-  res.send("hello world")
-})
-
-app.listen(PORT, () : void => {
-  console.log(`Server started at port : ${PORT}`)
-})
+import {RequestLogger} from './request'
+export default RequestLogger
