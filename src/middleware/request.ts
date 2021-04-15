@@ -26,11 +26,9 @@ const CLASS = {
 
 function colorTextLog(text:string, color:string) { return `\x1b[${color}m${text}\x1b[0m`; }
 
-// which urls to ignore
-// const ignore_urls = ['/logs']
-// get the params which are specified only. like query, body, url, params, type,
-// req.params is not avialable in middlewares
-// const parameters = ["index","path","method","query","body","cookies","time"]
+// 1. ignore_urls should support regex
+// 2. parameters must be pre-defined
+
 
 interface RequestLoggerProps{
   ignore_urls : Array<string>

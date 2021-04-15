@@ -15,7 +15,7 @@ app.set( "views", path.join( __dirname, "views" ) );
 app.set('view engine','ejs');
 
 // logs the request data to console in table form
-const RL = new RequestLogger({ignore_urls : ['/logs'],parameters:["index","path","method","query","body","time"], showLatestFirst : true})
+const RL = new RequestLogger({ignore_urls : ['/logs'],parameters:["index","path","method","query","body","time"], showLatestFirst : false})
 app.use(RL.Console())
 app.use('/logs',RL.Webpage())
 
