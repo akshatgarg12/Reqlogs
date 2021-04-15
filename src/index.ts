@@ -18,4 +18,5 @@
 // Copy all the view templates
 
 import {RequestLogger} from './request'
-export default RequestLogger
+
+export {RequestLogger}
