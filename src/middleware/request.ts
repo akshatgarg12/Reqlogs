@@ -36,6 +36,12 @@ interface RequestLoggerProps{
   showLatestFirst : boolean
 }
 
+interface RequestLoggerProps{
+  ignore_urls : Array<string>
+  parameters : Array<string>
+  showLatestFirst : boolean
+}
+
 class RequestLogger{
   ignore_urls : Array<string>
   parameters : Array<string>
