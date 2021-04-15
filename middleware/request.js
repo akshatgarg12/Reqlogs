@@ -15,6 +15,13 @@ const colors = {
   'PUT':COLOR.green,
   'DELETE':COLOR.red
 }
+const CLASS = {
+  'GET':'success',
+  'POST':'info',
+  'PATCH':'active',
+  'PUT':'warning',
+  'DELETE':'danger'
+}
 
 function colorTextLog(text, color) { return `\x1b[${color}m${text}\x1b[0m`; }
 
@@ -67,6 +74,7 @@ class RequestLogger{
         });
         // adding rows (this method is used to implement alternating colors)
         this.requests.forEach((req, _) => {
+          req["class"] = CLASS[req.method] || 'default'
           const color = colors[req.method] || 'white'
           p.addRow(req, {color})
         })
