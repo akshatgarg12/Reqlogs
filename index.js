@@ -16,15 +16,8 @@ app.set('view engine','ejs');
 
 // logs the request data to console in table form
 const RL = new RequestLogger({ignore_urls : ['/logs'],parameters:["index","path","method","query","body","time"], showLatestFirst : true})
-app.use(RL.API_LOGGER())
-app.use('/logs',RL.logs())
-
-// app.use(API_LOGGER({
-//   ignore_urls : ['/logs'],
-//   parameters : ["index","path","method","query","body","time"]
-// }))
-// // route to see the request table in HTML
-// app.use(logs)
+app.use(RL.Console())
+app.use('/logs',RL.Webpage())
 
 app.get('/' , (req, res) => {
   res.send("hello world")

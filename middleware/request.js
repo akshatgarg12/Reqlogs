@@ -1,6 +1,5 @@
 const { Table } = require('console-table-printer');
 
-
 const COLOR = {
   white_bold : "white_bold",
   yellow : "yellow",
@@ -33,7 +32,7 @@ class RequestLogger{
     this.showLatestFirst = showLatestFirst || false
     this.requests = []
   }
-  API_LOGGER(){
+  Console(){
     return (req, _res, next) => {
       // ignores the paths which are specified in the ignore_urls array
       if(!this.ignore_urls.includes(req.path)){
@@ -73,13 +72,12 @@ class RequestLogger{
         })
         // printing the table to console
         p.printTable()
-
         // console.table(this.requests)  
       }
       next()
     }
   }
-  logs(){
+  Webpage(){
     return (_, res) => {
       res.render('index', {logs:this.requests, params: this.parameters});
     }
