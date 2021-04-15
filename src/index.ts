@@ -8,8 +8,8 @@
 // app.use(RL.Console())
 // app.use(RL.Webpage())
 
-// app.get('/' , (_req:Request, res:Response) : void => {
-//   res.send("hello world")
+// app.all('/' , (req:Request, res:Response) : void => {
+//   res.send(req.body)
 // })
 
 // app.listen(PORT, () : void => {

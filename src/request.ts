@@ -11,8 +11,9 @@ import {RequestLoggerProps, BOOTSTRAP_CLASSES}  from './types'
 
 const defaultParameters = {
   path : true,
-  method : true,
+  method : true
 }
+
 class RequestLogger{
   app : any
   ignore_urls : Array<string>
