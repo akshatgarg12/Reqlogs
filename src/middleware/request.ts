@@ -1,4 +1,5 @@
-const { Table } = require('console-table-printer');
+import Table from 'console-table-printer'
+import {Request, Response, NextFunction} from 'express'
 
 const COLOR = {
   white_bold : "white_bold",
@@ -23,7 +24,7 @@ const CLASS = {
   'DELETE':'danger'
 }
 
-function colorTextLog(text, color) { return `\x1b[${color}m${text}\x1b[0m`; }
+function colorTextLog(text:string, color:string) { return `\x1b[${color}m${text}\x1b[0m`; }
 
 // which urls to ignore
 // const ignore_urls = ['/logs']
@@ -31,8 +32,18 @@ function colorTextLog(text, color) { return `\x1b[${color}m${text}\x1b[0m`; }
 // req.params is not avialable in middlewares
 // const parameters = ["index","path","method","query","body","cookies","time"]
 
+interface RequestLoggerProps{
+  ignore_urls : Array<string>
+  parameters : Array<string>
+  showLatestFirst : boolean
+}
+
 class RequestLogger{
-  constructor({ignore_urls, parameters, showLatestFirst}){
+  ignore_urls : Array<string>
+  parameters : Array<string>
+  showLatestFirst : boolean
+  requests: Array<any> 
+  constructor({ignore_urls, parameters, showLatestFirst} : RequestLoggerProps){
     // console.log(ignore_urls, parameters)
     this.ignore_urls = ignore_urls || []
     this.parameters = parameters || []
@@ -40,12 +51,13 @@ class RequestLogger{
     this.requests = []
   }
   Console(){
-    return (req, _res, next) => {
+    return (req:any, _res:Response, next:NextFunction) => {
       // ignores the paths which are specified in the ignore_urls array
       if(!this.ignore_urls.includes(req.path)){
-        const log = {}
+        const log:any = {}
         // creating the object using params
-        this.parameters.forEach((prop) => {
+        this.parameters.forEach((prop : string) => {
+          // @ts-ignore
           if(req[prop]){
             if(typeof(req[prop]) === "object"){
               // get all the keys of json
@@ -64,36 +76,37 @@ class RequestLogger{
         this.showLatestFirst ? this.requests.unshift(log) : this.requests.push(log)
 
         // columns for table
-        const columns = this.parameters.map((param) => ({ name : param}))
+        // const columns = this.parameters.map((param) => ({ name : param}))
 
-        // table object
-        const p = new Table({
-          title:"Requests",
-          columns,
-          maxLen:5
-        });
-        // adding rows (this method is used to implement alternating colors)
-        this.requests.forEach((req, _) => {
+        // // table object
+        // // @ts-ignore
+        // const p = new Table({
+        //   title:"Requests",
+        //   columns,
+        //   maxLen:5
+        // });
+      
+        // // adding rows (this method is used to implement alternating colors)
+        this.requests.forEach((req:any, _) => {
+          // @ts-ignore
           req["class"] = CLASS[req.method] || 'default'
-          const color = colors[req.method] || 'white'
-          p.addRow(req, {color})
+          // @ts-ignore
+          // const color = colors[req.method] || 'white'
+          // p.addRow(req, {color})
         })
-        // printing the table to console
-        p.printTable()
-        // console.table(this.requests)  
+        // // printing the table to console
+        // p.printTable()
+        console.table(this.requests)  
       }
       next()
     }
   }
   Webpage(){
-    return (_, res) => {
+    return (_ : Request, res:Response) => {
       res.render('index', {logs:this.requests, params: this.parameters});
     }
   }
 };
 
 
-
-module.exports = {
- RequestLogger
-}
+export {RequestLogger}
