@@ -6,10 +6,10 @@
 // // logs the request data to console in table form
 // const RL = new RequestLogger({ignore_urls : ['/logs'],showLatestFirst : false})
 // app.use(RL.Console())
-// app.use(RL.Webpage())
+// app.use(RL.Webpage({url : '/logs'}))
 
 // app.all('/' , (req:Request, res:Response) : void => {
-//   res.send(req.body)
+//   res.send("Hello world")
 // })
 
 // app.listen(PORT, () : void => {

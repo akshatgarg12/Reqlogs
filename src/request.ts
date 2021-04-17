@@ -23,10 +23,6 @@ class RequestLogger{
   constructor({ignore_urls, parameters=defaultParameters, showLatestFirst=true} : RequestLoggerProps){
     this.app = express()
 
-    this.app.use(cors())
-    this.app.use(express.json())
-    this.app.use(express.urlencoded({extended:true}))
-
     this.app.use(express.static(__dirname+'src'+ '/public'))
     this.app.set( "views", path.join( __dirname, "views" ) );
     this.app.set('view engine','ejs');
@@ -67,11 +63,13 @@ class RequestLogger{
       next()
     }
   }
-  Webpage(){
+  Webpage({url} : {url : string}){
     // middleware setup
-    this.app.get('/logs' , (_ : Request, res:Response) => {
+    const router = express.Router()
+    router.get('/', (req:Request, res:Response) =>{
       res.render('index', {logs:this.requests, params: this.parameters});
     })
+    this.app.use(url, router)
     return this.app
   }
 };
