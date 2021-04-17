@@ -64,9 +64,10 @@ This is mostly useful for debugging purposes, so to install it as a dev-dependen
 This will log your request data in form of tables in console and will render a webview as well.
 
 Webview for an example server
-![web-view](./docs/ss/web.png)
+![web-view](https://github.com/akshatgarg12/Reqlogs/blob/documentation/docs/ss/web.png)
 Console for an example server
-![console-view](./docs/ss/console.png)
+![console-view](https://github.com/akshatgarg12/Reqlogs/blob/documentation/docs/ss/console.png)
 
 
 [NPM](https://www.npmjs.com/package/reqlogs)
+[GITHUB](https://github.com/akshatgarg12/Reqlogs)
