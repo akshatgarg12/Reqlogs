@@ -1,5 +1,4 @@
 import express, {Request, Response, NextFunction, Router} from 'express'
-import cors from 'cors'
 import path from "path";
 import {RequestLoggerProps, BOOTSTRAP_CLASSES}  from './types'
 
