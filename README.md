@@ -63,9 +63,8 @@ This is mostly useful for debugging purposes, so to install it as a dev-dependen
 ### Working
 This will log your request data in form of tables in console and will render a webview as well.
 
-Webview for an example server
 ![web-view](https://github.com/akshatgarg12/Reqlogs/blob/documentation/docs/ss/web.png)
-Console for an example server
+
 ![console-view](https://github.com/akshatgarg12/Reqlogs/blob/documentation/docs/ss/console.png)
 
 
