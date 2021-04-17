@@ -1,6 +1,6 @@
 {
   "name": "reqlogs",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A simple logger, which logs the request to server in form of tables, it helps to debug the connection with client and can also be used for metrics.",
   "main": "dist/index.js",
   "scripts": {
