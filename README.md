@@ -1,4 +1,4 @@
-# REQLOGS 
+# *REQLOGS*
   A library to log the HTTP requests coming to the server for debugging, testing and monitoring purposes.
 <hr>
 It acts as a middleware and logs the request data in form of table in console and render it in form of bootstrap tables, everytime a request comes.
@@ -62,3 +62,11 @@ This is mostly useful for debugging purposes, so to install it as a dev-dependen
 
 ### Working
 This will log your request data in form of tables in console and will render a webview as well.
+
+Webview for an example server
+![web-view](./docs/ss/web.png)
+Console for an example server
+![console-view](./docs/ss/console.png)
+
+
+[NPM](https://www.npmjs.com/package/reqlogs)
